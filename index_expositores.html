@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VIBRA — Inscripción de Expositores</title>
+<style>
+  :root{ --bg:#0b0f1a; --panel:#0f172a; --stroke:#1f2a3a; --txt:#e5e7eb; --muted:#9fb0c3; --accent:#60a5fa; }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;background:var(--bg);color:var(--txt)}
+  .wrap{max-width:840px;margin:24px auto;padding:0 16px}
+  .card{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+  h1{margin:.2rem 0 1rem;font-size:1.8rem}
+  p.sub{color:var(--muted);margin-top:-4px}
+  label{display:block;margin:.6rem 0 .25rem;color:var(--muted)}
+  input, select, textarea{
+    width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--stroke);
+    background:#0c1428;color:#e5e7eb;outline:none;
+  }
+  textarea{min-height:110px;resize:vertical}
+  .row{display:grid;gap:14px;grid-template-columns:1fr}
+  @media (min-width:720px){ .row.two{grid-template-columns:1fr 1fr} }
+  .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .btn{border:1px solid var(--accent);background:transparent;color:#e5e7eb;
+    padding:12px 16px;border-radius:12px;cursor:pointer;font-weight:600;display:inline-block;text-decoration:none}
+  .primary{background:var(--accent);border-color:var(--accent);color:#06111e}
+  .success{display:none;margin-top:16px;padding:18px;border:1px solid #134e4a;background:#052e2b;border-radius:12px;color:#9ff0e0}
+  .hidden{display:none}
+  .req{color:var(--accent)}
+</style>
+</head>
+<body>
+
+  <!-- Iframe oculto: el form POSTEA aquí y la página no navega -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <div class="wrap">
+    <div class="card">
+
+      <!-- FORMULARIO -->
+      <form id="formExpo"
+            action="https://script.google.com/macros/s/AKfycbww1X-R0dt2LKGwnEu0OOTgZ6Wd51gvHyrEVQtHm5W8335jgN0Z0cqPI7mUjkV7vPNchA/exec"
+            method="POST"
+            target="hidden_iframe"
+            onsubmit="return enviarExpo()">
+        <!-- 'destino' decide la pestaña -->
+        <input type="hidden" name="destino" value="Expositores" />
+
+        <h1>Inscripción de Expositores</h1>
+        <p class="sub">Vende tus productos en VIBRA. Completa el formulario y te contactamos para confirmar el stand.</p>
+
+        <div class="row two">
+          <div>
+            <label>Nombre y apellido <span class="req">*</span></label>
+            <input name="nombre" required placeholder="Ej. Nicole Dibono" />
+          </div>
+          <div>
+            <label>Nombre del emprendimiento <span class="req">*</span></label>
+            <input name="marca" required placeholder="Ej. Halo" />
+          </div>
+        </div>
+
+        <div class="row two">
+          <div>
+            <label>Rubro principal <span class="req">*</span></label>
+            <select name="rubro" required>
+              <option value="">Seleccioná…</option>
+              <option>Ropa</option>
+              <option>Bisutería</option>
+              <option>Alimentos</option>
+              <option>Bienestar / Yoga</option>
+              <option>Entretenimiento</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label>Ciudad</label>
+            <input name="ciudad" placeholder="Ej. Mérida" />
+          </div>
+        </div>
+
+        <div class="row two">
+          <div>
+            <label>Teléfono <span class="req">*</span></label>
+            <input name="tel" required placeholder="+58 412 *******" />
+          </div>
+          <div>
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" required placeholder="tu@email.com" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Instagram</label>
+            <input name="instagram" placeholder="@tuusuario" />
+          </div>
+        </div>
+
+        <div class="row two">
+          <div>
+            <label>¿Necesitás electricidad? <span class="req">*</span></label>
+            <select name="electricidad" required>
+              <option value="">Seleccioná…</option>
+              <option>Sí</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div>
+            <label>Tamaño de stand <span class="req">*</span></label>
+            <select name="tamano" required>
+              <option value="">Elegí una opción…</option>
+              <option>3x3 m (estándar)</option>
+              <option>2x2 m</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Descripción de productos / necesidades</label>
+            <textarea name="descripcion" placeholder="¿Qué vas a vender y qué necesitás? Mesa, sillas, etc."></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <label><input type="checkbox" required /> Acepto las normas del evento y el reglamento (enlace próximamente).</label>
+        </div>
+
+        <div class="btns">
+          <button type="submit" class="btn primary">Enviar solicitud</button>
+        </div>
+      </form>
+
+      <!-- MENSAJE FINAL PERMANENTE -->
+      <section id="doneExpo" class="success" role="status" aria-live="polite">
+        ✅ ¡Gracias por registrarte y acompañarnos en esta aventura!<br>
+        Pronto serás contactada/o para más detalles.<br><br>
+        <a class="btn primary" href="https://www.instagram.com/vibrafesta?igsh=ZmxuOWEwZmVndXNw/">Salir</a>
+      </section>
+
+    </div>
+  </div>
+
+<script>
+  function enviarExpo(){
+    // Mostrar “gracias” y ocultar el formulario
+    document.getElementById('formExpo').classList.add('hidden');
+    document.getElementById('doneExpo').style.display = 'block';
+    // MUY IMPORTANTE: devolver true para permitir el POST al iframe
+    return true;
+  }
+</script>
+</body>
+</html>
